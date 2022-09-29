@@ -23,7 +23,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="voter API",
         default_version='v1.0',
-        description="Api de gestion de voter",
+        description="Api de gestion de votantes",
         terms_of_service="heroku web",
         contact=openapi.Contact(email="brandonnakama@gmail.com.co"),
         license=openapi.License(name="BSD License"),
