@@ -69,7 +69,6 @@ class Leader(models.Model):
     image = models.CharField(max_length=500)
     basic_data = models.OneToOneField(BasicData,  on_delete=models.CASCADE)
 
-
 class PollingStation(models.Model):
     name = models.CharField(max_length=45)
     address = models.CharField(max_length=50, blank=True, null=True)
