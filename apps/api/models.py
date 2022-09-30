@@ -13,6 +13,7 @@ class SocialUserManager(BaseUserManager):
         user = self.model(email=email, is_leader=True, **kwargs)
         user.set_password(password)
         user.save()
+        Admin.objects.create()
         return user
 
     def create_superuser(self, email, password, **kwargs):
@@ -20,6 +21,7 @@ class SocialUserManager(BaseUserManager):
                           is_superuser=True, **kwargs)
         user.set_password(password)
         user.save()
+        Admin.objects.create(basic_data=user)
         return user
 
 
@@ -59,15 +61,14 @@ class BasicData(AbstractUser):
 
 
 class Admin(models.Model):
-    name = models.CharField(max_length=25)
-    basic_data = models.OneToOneField(BasicData,  on_delete=models.CASCADE)
+    basic_data = models.OneToOneField(BasicData, related_name ="basic_data_admin",  on_delete=models.CASCADE)
 
 
 class Leader(models.Model):
     admin = models.ForeignKey(
         Admin, related_name="admin_leaders", on_delete=models.CASCADE)
     image = models.CharField(max_length=500)
-    basic_data = models.OneToOneField(BasicData,  on_delete=models.CASCADE)
+    basic_data = models.OneToOneField(BasicData, related_name="basic_data_leader",  on_delete=models.CASCADE)
 
 class PollingStation(models.Model):
     name = models.CharField(max_length=45)
