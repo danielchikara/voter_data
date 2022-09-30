@@ -80,8 +80,8 @@ class PollingStation(models.Model):
 class Voter(models.Model):
     polling_station = models.ForeignKey(
         PollingStation, related_name="polling_station_voters", on_delete=models.CASCADE)
-    basic_data = models.OneToOneField(BasicData,  on_delete=models.CASCADE)
+    basic_data = models.OneToOneField(BasicData, related_name = "basic_data_voter",  on_delete=models.CASCADE)
     leader = models.ForeignKey(Leader, related_name="leader_voters", on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(
-        Leader, related_name="neighborhood_voters", on_delete=models.CASCADE)
+        Neighborhood, related_name="neighborhood_voters", on_delete=models.CASCADE)
     address = models.CharField(max_length=50, blank=True, null=True)
